@@ -20,6 +20,12 @@
 
 ---
 
+<p align="center">
+  <img width="32%" alt="Снимок экрана 2026-10-05 191621" src="https://github.com/user-attachments/assets/d5d22bb0-daa1-469b-be39-73cdf0233b14" />
+  <img width="32%" alt="Снимок экрана 2026-10-05 191720" src="https://github.com/user-attachments/assets/070773c3-b822-4edf-aefc-caf5e426c1dc" />
+  <img width="32%" alt="Снимок экрана 2026-10-05 191753" src="https://github.com/user-attachments/assets/34512621-60fe-415d-a1ca-37e13b316df0" />
+</p>
+
 ## 📖 About
 Proximity Engine is a CEP extension for Adobe After Effects, designed primarily as a powerful tool for animating a massive number of layers on the timeline using a single Controller layer. Its main feature is the ability to create complex scenes with hundreds of animated objects as easily as possible. It allows you to animate layer properties (such as Position, Scale, Rotation, Opacity, and Custom Effects) based on their physical distance to a designated "Controller" layer on the timeline.
 
