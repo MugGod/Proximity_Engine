@@ -12,7 +12,7 @@
 
 <div align="center">
   <h1>🌌 Proximity Engine for After Effects</h1>
-  <p><b>A distance-based animation extension for Adobe After Effects.</b></p>
+  <p><b>A distance-based proximity animation extension for Adobe After Effects.</b></p>
 
   [![Version](https://img.shields.io/badge/version-v0.6-00F0FF?style=for-the-badge)](CHANGELOG.md)
   [![Platform](https://img.shields.io/badge/platform-After_Effects-FF2A6D?style=for-the-badge)](#)
@@ -27,7 +27,7 @@
 </p>
 
 ## 📖 About
-Proximity Engine is a CEP extension for Adobe After Effects, designed primarily as a powerful tool for animating a massive number of layers on the timeline using a single Controller layer. Its main feature is the ability to create complex scenes with hundreds of animated objects as easily as possible. It allows you to animate layer properties (such as Position, Scale, Rotation, Opacity, and Custom Effects) based on their physical distance to a designated "Controller" layer on the timeline.
+Proximity Engine is a CEP extension for Adobe After Effects, designed primarily as a powerful tool for animating a massive number of layers on the timeline using a single Controller layer (Proximity animation). Its main feature is the ability to create complex scenes with hundreds of animated objects as easily as possible. It allows you to animate layer properties (such as Position, Scale, Rotation, Opacity, and Custom Effects) based on their physical distance to a designated "Controller" layer on the timeline.
 
 ## ✨ Features & Mechanics
 
