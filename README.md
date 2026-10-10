@@ -1,7 +1,7 @@
 <br>
 <div align="center">
   <h2>
-    <a href="../../releases/latest">📥 DOWNLOAD LATEST RELEASE</a>
+    <a href="../../releases/latest">📥 DOWNLOAD LATEST VERSION</a>
   </h2>
 </div>
 <br>
@@ -9,105 +9,104 @@
 <div align="right">
   <h3>🌍 <strong>English</strong> | <a href="README.ru.md">🇷🇺 Русский</a></h3>
 </div>
-
 <div align="center">
   <h1>🌌 Proximity Engine for After Effects</h1>
-  <p><b>A distance-based proximity animation extension for Adobe After Effects.</b></p>
+  <p><b>Distance-based layer proximity animation extension for Adobe After Effects.</b></p>
 
-  [![Version](https://img.shields.io/badge/version-v0.6-00F0FF?style=for-the-badge)](CHANGELOG.md)
+  [![Version](https://img.shields.io/badge/version-v0.7-00F0FF?style=for-the-badge)](CHANGELOG.md)
   [![Platform](https://img.shields.io/badge/platform-After_Effects-FF2A6D?style=for-the-badge)](#)
 </div>
 
 ---
-
 <p align="center">
-  <img width="32%" alt="Снимок экрана 2026-10-05 191621" src="https://github.com/user-attachments/assets/d5d22bb0-daa1-469b-be39-73cdf0233b14" />
-  <img width="32%" alt="Снимок экрана 2026-10-05 191720" src="https://github.com/user-attachments/assets/070773c3-b822-4edf-aefc-caf5e426c1dc" />
-  <img width="32%" alt="Снимок экрана 2026-10-05 191753" src="https://github.com/user-attachments/assets/34512621-60fe-415d-a1ca-37e13b316df0" />
+  <img width="32%" alt="изображение" src="https://github.com/user-attachments/assets/0608d077-588d-4aa9-b508-e8c59bba0c20" />
+  <img width="32%" alt="изображение" src="https://github.com/user-attachments/assets/ee781221-c63d-4933-908d-90f447d1150f" />
+  <img width="32%" alt="изображение" src="https://github.com/user-attachments/assets/cd368e44-2f17-47fd-b617-a84d3e7561c1" />
 </p>
 
-## 📖 About
-Proximity Engine is a CEP extension for Adobe After Effects, designed primarily as a powerful tool for animating a massive number of layers on the timeline using a single Controller layer (Proximity animation). Its main feature is the ability to create complex scenes with hundreds of animated objects as easily as possible. It allows you to animate layer properties (such as Position, Scale, Rotation, Opacity, and Custom Effects) based on their physical distance to a designated "Controller" layer on the timeline.
+## 📖 About the Project
+Proximity Engine is a CEP extension for Adobe After Effects. Primarily, it is a tool for effortlessly animating a massive number of layers on the timeline using a single controller layer (Proximity animation). Its main feature is the ability to easily create large-scale scenes with numerous animated objects. It allows you to animate layer properties (position, scale, rotation, opacity, and custom effects) based on their physical distance to a selected controller layer on the timeline.
 
-## ✨ Features & Mechanics
+## ✨ Features and Mechanics
 
-### 🚀 100% Portable (No Plugin Required for Playback)
-An essential feature of this project is that the plugin acts purely as a UI wrapper for the engine. Projects created using Proximity Engine can be safely shared with other people. Even if they don't have this extension installed, everything will work perfectly. They will even retain the ability to edit the project and use most of its features because almost all calculations are natively baked into expressions on the layers.
+### 🚀 100% Portability (No Plugin Required for Playback)
+It is important to note that the plugin is simply a UI wrapper for the engine itself. Projects created using this extension can be safely shared with others. Even if they don't have Proximity Engine installed, everything will work perfectly. Moreover, they will still be able to edit the project and use most of its features, as almost all calculations are offloaded to native expressions on the layers.
 
-### 📐 1. Distance Physics & Transformations
-*   **Property Control:** Link Position (push objects away), Scale, Rotation, Opacity, and Custom Effect properties (like sliders or specific plugin parameters) to the controller.
-*   **Granular 3D Support:** Separate toggles for X, Y, and Z rotation. The script automatically detects 3D layers. If applied to a 2D layer, it falls back to standard 2D rotation.
-*   **One-Sided 3D Opacity:** Calculates the layer's normal vector. Opacity can be set to drop to 0% when the back of a 3D layer faces the camera.
-*   **Sigmoid Sharpness:** Each property has a "Sharpness" parameter (1-10) that defines how the animation propagates across a massive group of objects. At the minimum value (1), moving the controller through the layers creates a smooth, continuous wave of transformations. At higher values, the interpolation curve compresses into a hard boundary. This turns the smooth wave into a sharp, stepped, or "pixelated" cascading effect, where neighboring objects pop into their new states instantly rather than blending gradually.
-*   **Deterministic Randomization:** Set global wake-up offsets or property-specific random spreads. The engine uses a custom pseudo-random algorithm tied to layer names. This means **layers with identical names will generate the exact same random values**. This is incredibly useful when you need to stack or "sandwich" multiple layers that must move perfectly in sync, without disabling the random effect for the rest of the scene.
+### 📐 1. Distance Physics and Transformations
+*   **Property Control:** Link Position (pushing objects apart), Scale, Rotation, Opacity, and Custom Effect parameters (e.g., sliders) to the controller.
+*   **Separate 3D Rotation:** Individual toggles for X, Y, and Z axes. The script checks if the layer is 3D; if it's 2D, standard flat rotation is applied.
+*   **One-Sided 3D Opacity:** Normal vector calculation. The opacity of a 3D layer drops to 0% if it turns its "back" to the camera.
+*   **Boundary Sharpness (Sigmoid Sharpness):** Each property has a sharpness parameter (from 1 to 10) that defines exactly how the animation propagates through a massive array of objects. At the minimum value (1), the controller approaching a cluster of layers creates a soft, smooth wave of transformations. As the value increases, the interpolation curve compresses into a hard boundary. This turns a smooth wave into a sharp, stepped, or "pixelated" cascading effect, where the animation difference between adjacent objects becomes maximally contrasting, snapping to new values instantly rather than blending gradually.
+*   **Deterministic Randomization:** Global start offset and random value scatter. This is based on a custom pseudo-randomization algorithm tied to layer names. This means **layers with identical names will generate absolutely identical random values**. This is indispensable when you need to stack several layers that must move synchronously, without disabling the global random for the rest of the scene.
 
 ### 🧠 2. Centralized "Mega-Expression" Architecture
-Instead of duplicating heavy calculation code onto every single animated layer, Proximity Engine utilizes a centralized "mega-expression" system. The core mathematical engine resides solely on one universal layer (`PROXIMITY_ENGINE`), while all other layers simply use lightweight reference expressions that pull data from this central hub. 
-*   **Clean & Performant:** Keeps your project timeline completely uncluttered and centralizes all control to a single engine layer.
-*   **Headless Editing (No UI required):** Because of this architecture, if you are working without the extension panel open (or if you send the project to someone who doesn't own the plugin), **absolutely all engine parameters can be manually tweaked directly inside the text expression of the `PROXIMITY_ENGINE` layer**.
+Instead of applying heavy processing code to every single layer in the scene, the plugin uses a "mega-expression" system. All core computational code is located on one universal layer (`PROXIMITY_ENGINE`), while all other layers simply reference it using lightweight link expressions.
+*   **Cleanliness & Optimization:** The project stays clean, avoids bloat from duplicated code, and management is centralized in a single point—the engine layer.
+*   **Headless Operation:** Thanks to this architecture, when working without the extension panel open (or if you handed the project to a colleague without the plugin), **absolutely all parameters can be freely edited manually right inside the expression of the `PROXIMITY_ENGINE` text layer**.
 
-### 🧩 3. Expression Management
-*   **Blend Expressions (Safe Mode):** When enabled, the plugin does not overwrite existing expressions on your layers (e.g., `wiggle()`). It wraps your original code in a `try...catch` block and calculates the mathematical delta, adding the proximity effect on top.
-*   **Smart Disconnect:** The plugin can locate its own generated code on selected layers, remove it, and restore the original values or previous user expressions.
-*   **Shape Group Targeting:** Expressions can be applied directly to internal Shape Layer groups (e.g., `Contents > Group 1`). The script calculates local position deltas so internal paths don't offset outside the composition.
-*   **Cross-Comp Binding:** Allows linking layers to an engine and controller that are physically located in a different composition.
+### 🧩 3. Expressions Management
+*   **Expression Blending (Blend Mode):** When activated, the plugin doesn't overwrite your old expressions (e.g., `wiggle()`). The code is wrapped in a `try...catch` block, a mathematical delta is calculated, and the Proximity effect is added on top of existing animations.
+*   **Smart Disconnect:** The plugin locates its expressions on selected layers, removes them, and restores previous values or previous custom expressions.
+*   **Shape Groups Support:** Ability to apply expressions to internal shape layer groups (`Contents > Group 1`). The script calculates local position deltas, so internal groups won't fly outside the composition bounds.
+*   **Cross-Comp Binding:** Link layers to a controller physically located in a different composition.
 
-### 🎛️️ 4. Multi-Instance Support
-*   **Multiple Engines:** Create several independent engines in a single composition (named `PROXIMITY_ENGINE`, `PROXIMITY_ENGINE_2`, etc.).
-*   **Engine Dropdown:** A built-in selector in the UI allows you to switch the active context. Edits and connections are routed to the selected engine.
+### 🎛️ 4. Multi-Instance
+*   **Multiple Engines:** Create several independent systems within a single composition (`PROXIMITY_ENGINE`, `PROXIMITY_ENGINE_2`, etc.).
+*   **Engine Selector:** A dropdown menu to switch context. All parameters and bindings are automatically routed to the selected text layer engine.
 
-### 🗂️ 5. Group Editor (Bulk Operations)
-*   **Group Detection:** The plugin groups layers by their base names (ignoring trailing numbers, e.g., `Base 1` and `Base 2` form the `Base` group).
-*   **Group Sync:** Link properties from one layer group to another based on matching suffixes. (e.g., Apply properties from `Overlay 1` to `Base 1`, `Overlay 2` to `Base 2`, automatically).
-*   **Group Effect Remover:** Select a specific effect on one layer and remove that exact effect from all other layers in the same group with one click.
-*   **Target Selection:** Instantly highlight all layers belonging to a specific group on the timeline.
+### 🗂️ 5. Group Editor (Mass Operations)
+*   **Group Detection:** The plugin groups layers by their base names (stripping number suffixes, e.g., `Base 1` and `Base 2` become the `Base` group).
+*   **Group Sync:** Link properties of one layer group to another based on suffix matching (e.g., automatically transferring properties from `Overlay 1` to `Base 1`, and so on for all layers in the groups).
+*   **🎭 Mass Track Matte & Parent:** The Group Editor includes the ability to assign Track Mattes (Alpha/Luma, including Inverted) and Parents between layer groups based on their numbering (e.g., layer `Mask 1` automatically becomes the mask for `Panel 1`, etc., for all layers in the two groups). Supports both the new Track Matte API (AE 23.0+) and the classic method for older AE versions (Note: the classic method is untested, stability unknown).
+*   **Group Effect Remover:** Select an effect on one layer, and the plugin will remove that exact same effect from all other layers in that group with a single click.
+*   **Target Selection:** Quickly select all layers of a chosen group on the timeline. Useful if group layers are scattered throughout the comp with other layers in between them.
+*   **Active Connections Manager:** A unified list to view and manage all active bindings (Links, Mattes, Parents). The delete button recognizes and breaks the selected connection type.
 
 ### 💾 6. Preset System
-*   **JSON Storage:** Save current engine parameters as lightweight `.json` files.
-*   **Custom Directory:** Choose any local folder to store presets. The path is saved globally in After Effects preferences (`app.settings`) and persists across projects.
-*   **Management:** Load, overwrite, and delete presets directly from the plugin interface.
+*   **JSON Format:** Save current parameters as lightweight `.json` files.
+*   **Custom Folder:** Choose any local folder for storage. The path is saved globally in After Effects settings (`app.settings`) and works across all projects.
+*   **Management:** Load, Overwrite, and Delete presets directly from the UI.
 
-### 🖥️ 7. Interface & QoL Features
-*   **Auto-Apply:** A toggle that updates engine parameters in After Effects in real-time as you type or adjust values in the UI.
-*   **Sync Button:** Fetches current values from the active Engine text layer back into the UI inputs.
+### 🖥️ 7. Interface & QoL
+*   **Auto-Apply:** Option to send values to After Effects in real-time as you type in text fields.
+*   **Sync Button:** Force request current values from the text layer engine back into the UI.
+*   **Mass Duplicate:** Feature to generate a specified number of layer copies. Includes a direction toggle (Upwards / Downwards) to place duplicates above or below the original on the timeline. Perfect for quickly generating layers before linking them.
 
 ---
 
-## 📦 Installation Instructions
+## 📦 Installation Guide
 
 1. Download the `ProximityEngine vX.X.zip` archive from the [Releases](../../releases) section.
 
-2. Extract the contents of the archive into the Adobe CEP extensions system folder:
+2. Extract the archive contents into the Adobe CEP extensions system folder:
    - **Windows:** `C:\Program Files (x86)\Common Files\Adobe\CEP\extensions\`
    - **macOS:** `/Library/Application Support/Adobe/CEP/extensions/`
 
 3. **Enable Developer Mode (PlayerDebugMode):**
-   Since the extension does not have an official Adobe digital signature, it must be allowed in the system, otherwise After Effects will block it.
+   Since the extension does not have an official Adobe digital signature, it must be allowed in the OS; otherwise, After Effects will block it.
 
    * **For Windows (Automatic):**
      1. Download the `PlayerDebugMode.reg` file from the repository.
      2. Double-click the file.
-     3. Read the warning, click Yes, or proceed to the manual option.
+     3. Read the warning, click "Yes", or proceed to the manual method.
 
    * **For Windows (Manual):**
      1. Press `Win + R`, type `regedit`, and press `Enter`.
      2. Navigate to: `HKEY_CURRENT_USER\Software\Adobe\`
-     3. Find the key for the required version of your CSXS package (e.g., `CSXS.11`, `CSXS.12`, etc., depending on the After Effects version). If there is no such key, create it manually.
+     3. Find the key for your CSXS version (e.g., `CSXS.11`, `CSXS.12`, etc., depending on your After Effects version). If it doesn't exist, create it manually.
      4. Inside this key, create a String Value named **`PlayerDebugMode`**.
-     5. Change its value to **`1`**.
+     5. Set its value to **`1`**.
 
    * **For macOS:**
-     Open the terminal and run the command (replace `11` with the version of your CSXS package if using a different year of After Effects):
+     Open Terminal and execute the following command (replace `11` with your CSXS version if using a different AE release year):
      ```bash
      defaults write com.adobe.CSXS.11 PlayerDebugMode 1
      ```
 
-4. Restart After Effects and go to the menu: **Window > Extensions > Proximity Engine**.
-
+4. Restart After Effects and navigate to the menu: **Window > Extensions > Proximity Engine**.
 <br>
 <div align="center">
   <h2>
-    <a href="../../releases/latest">📥 DOWNLOAD LATEST RELEASE</a>
+    <a href="../../releases/latest">📥 DOWNLOAD LATEST VERSION</a>
   </h2>
 </div>
-<br>
